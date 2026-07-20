@@ -14,6 +14,8 @@ const api = {
   aiChat: (prompt: string): Promise<string> => ipcRenderer.invoke('ai:chat', prompt),
   aiSetKey: (key: string): Promise<void> => ipcRenderer.invoke('ai:set-key', key),
   aiHasKey: (): Promise<boolean> => ipcRenderer.invoke('ai:has-key'),
+  githubSetToken: (token: string): Promise<void> => ipcRenderer.invoke('github:set-token', token),
+  githubHasToken: (): Promise<boolean> => ipcRenderer.invoke('github:has-token'),
   onProgress: (cb: (data: { stage: string; percent: number; message: string }) => void) => {
     const handler = (_: any, data: any) => cb(data)
     ipcRenderer.on('git:progress', handler)

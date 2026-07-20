@@ -8,6 +8,8 @@ export interface ElectronAPI {
   aiChat: (prompt: string) => Promise<string>
   aiSetKey: (key: string) => Promise<void>
   aiHasKey: () => Promise<boolean>
+  githubSetToken: (token: string) => Promise<void>
+  githubHasToken: () => Promise<boolean>
   onProgress: (cb: (data: { stage: string; percent: number; message: string }) => void) => () => void
 }
 

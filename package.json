@@ -1,6 +1,6 @@
 {
   "name": "visigit",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Git repository visualizer with AI-powered commit summaries",
   "main": "./out/main/index.js",
   "bin": {
@@ -43,7 +43,7 @@
     "@uiw/react-heat-map": "^2.3.4",
     "recharts": "^2.15.3",
     "simple-git": "^3.36.0",
-    "electron": "^35.1.5"
+    "visigit": "^1.0.4"
   },
   "devDependencies": {
     "@types/react": "^19.1.2",
@@ -56,7 +56,8 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "tailwindcss": "^3.4.17",
-    "typescript": "^5.8.3"
+    "typescript": "^5.8.3",
+    "electron": "^35.1.5"
   },
   "build": {
     "appId": "com.visigit.app",
@@ -73,7 +74,7 @@
       "identity": null,
       "target": [
         {
-          "target": "dir",
+          "target": "zip",
           "arch": [
             "x64",
             "arm64"

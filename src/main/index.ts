@@ -8,6 +8,7 @@ import simpleGit from 'simple-git'
 import { tmpdir } from 'os'
 
 let nimApiKey = ''
+let githubToken = ''
 
 function isGitHubUrl(input: string): boolean {
   return /github\.com\/[^/]+\/[^/]+/.test(input)
@@ -104,7 +105,11 @@ async function ensureClone(url: string): Promise<string> {
     sendProgress('clone', pct, 'Cloning repository...')
   }, 400)
 
-  await simpleGit().clone(url, tempDir, ['--depth=200', '--no-single-branch'])
+  let cloneUrl = url
+  if (githubToken && isGitHubUrl(url)) {
+    cloneUrl = url.replace('https://github.com/', `https://${githubToken}@github.com/`)
+  }
+  await simpleGit().clone(cloneUrl, tempDir, ['--depth=200', '--no-single-branch'])
 
   clearInterval(timer)
   sendProgress('clone', 95, 'Reading branches...')
@@ -241,6 +246,14 @@ app.whenReady().then(() => {
 
   ipcMain.handle('ai:has-key', async () => {
     return nimApiKey.length > 0
+  })
+
+  ipcMain.handle('github:set-token', async (_, token: string) => {
+    githubToken = token
+  })
+
+  ipcMain.handle('github:has-token', async () => {
+    return githubToken.length > 0
   })
 
   app.on('activate', () => {

@@ -8,11 +8,16 @@ interface SettingsModalProps {
 export default function SettingsModal({ open, onClose }: SettingsModalProps) {
   const [key, setKey] = useState('')
   const [saved, setSaved] = useState(false)
+  const [ghToken, setGhToken] = useState('')
+  const [ghSaved, setGhSaved] = useState(false)
 
   useEffect(() => {
     if (open) {
       window.electronAPI.aiHasKey().then((has) => {
         setSaved(has)
+      })
+      window.electronAPI.githubHasToken().then((has) => {
+        setGhSaved(has)
       })
     }
   }, [open])
@@ -53,6 +58,53 @@ export default function SettingsModal({ open, onClose }: SettingsModalProps) {
         </div>
 
         <div className="p-4 space-y-4">
+          <div>
+            <label className="text-[11px] text-[#999999] font-light block mb-1.5">
+              GitHub Token
+            </label>
+            <p className="text-[10px] text-[#555560] mb-2 font-light">
+              Required for private repos.{' '}
+              <a
+                href="https://github.com/settings/tokens"
+                target="_blank"
+                rel="noreferrer"
+                className="text-[#888888] underline underline-offset-2 hover:text-[#d0d0d0] transition-colors"
+              >
+                Generate a token
+              </a>
+              {' '}(select <span className="text-[#777]">repo</span> scope)
+            </p>
+            <input
+              type="password"
+              value={ghToken}
+              onChange={(e) => { setGhToken(e.target.value); setGhSaved(false) }}
+              placeholder="ghp_..."
+              className="w-full px-3 py-2 bg-white/[0.03] border border-neutral-800 rounded-lg text-sm text-white placeholder:text-neutral-600 focus:outline-none focus:border-neutral-500 transition-all duration-200 font-light font-mono"
+            />
+          </div>
+
+          <div className="flex items-center justify-between">
+            <p className="text-[10px] text-[#555560] font-light">
+              {ghSaved ? 'Token set' : 'No token'}
+            </p>
+            <button
+              onClick={async () => {
+                await window.electronAPI.githubSetToken(ghToken.trim())
+                setGhSaved(true)
+              }}
+              disabled={!ghToken.trim()}
+              className={`px-4 py-1.5 rounded-lg text-[11px] font-medium transition-all duration-200 ${
+                ghSaved
+                  ? 'bg-white/[0.06] text-[#888888]'
+                  : 'bg-white text-black hover:bg-neutral-200 disabled:opacity-20 disabled:cursor-not-allowed'
+              }`}
+            >
+              {ghSaved ? 'Saved' : 'Save Token'}
+            </button>
+          </div>
+
+          <div className="border-t border-[#1a1a24]" />
+
           <div>
             <label className="text-[11px] text-[#999999] font-light block mb-1.5">
               NVIDIA NIM API Key
