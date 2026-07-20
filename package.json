@@ -1,6 +1,6 @@
 {
   "name": "visigit",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Git repository visualizer with AI-powered commit summaries",
   "main": "./out/main/index.js",
   "bin": {
