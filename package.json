@@ -1,0 +1,117 @@
+{
+  "name": "visigit",
+  "version": "1.0.3",
+  "description": "Git repository visualizer with AI-powered commit summaries",
+  "main": "./out/main/index.js",
+  "bin": {
+    "visigit": "bin/visigit.js"
+  },
+  "files": [
+    "out/**/*",
+    "bin/**/*",
+    "logo.png"
+  ],
+  "author": "shayderrr",
+  "license": "MIT",
+  "homepage": "https://github.com/shayderrr/visigit",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/shayderrr/visigit.git"
+  },
+  "scripts": {
+    "dev": "electron-vite dev",
+    "build": "electron-vite build",
+    "preview": "electron-vite preview",
+    "prepublishOnly": "electron-vite build",
+    "package": "electron-vite build && electron-builder --publish=never",
+    "package:mac": "electron-vite build && electron-builder --mac --publish=never",
+    "package:win": "electron-vite build && electron-builder --win --publish=never",
+    "package:linux": "electron-vite build && electron-builder --linux --publish=never",
+    "package:mac:arm": "electron-vite build && electron-builder --mac --arm64 --publish=never",
+    "package:mac:x64": "electron-vite build && electron-builder --mac --x64 --publish=never",
+    "package:win:arm": "electron-vite build && electron-builder --win --arm64 --publish=never",
+    "package:win:x64": "electron-vite build && electron-builder --win --x64 --publish=never",
+    "package:linux:arm": "electron-vite build && electron-builder --linux --arm64 --publish=never",
+    "package:linux:x64": "electron-vite build && electron-builder --linux --x64 --publish=never"
+  },
+  "dependencies": {
+    "@electron-toolkit/utils": "^4.0.0",
+    "@gitgraph/react": "^1.6.0",
+    "@uiw/react-heat-map": "^2.3.4",
+    "electron": "^35.1.5",
+    "recharts": "^2.15.3",
+    "simple-git": "^3.36.0"
+  },
+  "devDependencies": {
+    "@types/react": "^19.1.2",
+    "@types/react-dom": "^19.1.2",
+    "@vitejs/plugin-react": "^4.4.1",
+    "autoprefixer": "^10.4.21",
+    "electron-builder": "^26.0.12",
+    "electron-vite": "^3.1.0",
+    "postcss": "^8.5.4",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "tailwindcss": "^3.4.17",
+    "typescript": "^5.8.3"
+  },
+  "build": {
+    "appId": "com.visigit.app",
+    "productName": "VisiGit",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "out/**/*"
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "logo.png",
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ]
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "icon": "logo.png"
+    },
+    "linux": {
+      "target": [
+        {
+          "target": "AppImage",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        },
+        {
+          "target": "deb",
+          "arch": [
+            "x64",
+            "arm64"
+          ]
+        }
+      ],
+      "category": "Development",
+      "icon": "logo.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true
+    }
+  }
+}
