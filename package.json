@@ -11,7 +11,10 @@
     "bin/**/*",
     "logo.png"
   ],
-  "author": "shayderrr",
+  "author": {
+    "name": "shayderrr",
+    "email": "darknessshayder@gmail.com"
+  },
   "license": "MIT",
   "homepage": "https://github.com/shayderrr/visigit",
   "repository": {
@@ -38,9 +41,9 @@
     "@electron-toolkit/utils": "^4.0.0",
     "@gitgraph/react": "^1.6.0",
     "@uiw/react-heat-map": "^2.3.4",
-    "electron": "^35.1.5",
     "recharts": "^2.15.3",
-    "simple-git": "^3.36.0"
+    "simple-git": "^3.36.0",
+    "electron": "^35.1.5"
   },
   "devDependencies": {
     "@types/react": "^19.1.2",
@@ -66,10 +69,11 @@
     ],
     "mac": {
       "category": "public.app-category.developer-tools",
-      "icon": "logo.png",
+      "icon": "applogo.png",
+      "identity": null,
       "target": [
         {
-          "target": "dmg",
+          "target": "dir",
           "arch": [
             "x64",
             "arm64"
@@ -87,7 +91,7 @@
           ]
         }
       ],
-      "icon": "logo.png"
+      "icon": "applogo.png"
     },
     "linux": {
       "target": [
@@ -107,7 +111,7 @@
         }
       ],
       "category": "Development",
-      "icon": "logo.png"
+      "icon": "applogo.png"
     },
     "nsis": {
       "oneClick": false,
